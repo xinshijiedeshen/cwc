@@ -43,7 +43,7 @@ public class CodeGenerator {
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setFileOverride(true);
+//        gc.setFileOverride(true);
         String projectPath = System.getProperty("user.dir");
         gc.setOutputDir(projectPath + "/admin/src/main/java");
         //这里你填上自己想自己的用户，也可以不填
@@ -67,6 +67,8 @@ public class CodeGenerator {
 //        pc.setModuleName(scanner("模块名"));
         //这里需要填上自己的项目包路径。
         pc.setParent("com.cwc.admin");
+        pc.setService("mp");
+        pc.setServiceImpl("mp.impl");
         mpg.setPackageInfo(pc);
 
         // 自定义配置
@@ -137,7 +139,10 @@ public class CodeGenerator {
 //        strategy.setSuperControllerClass("你自己的父类控制器,没有就不用设置!");
         // 写于父类中的公共字段
 //        strategy.setSuperEntityColumns("id");
-        strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
+        String scanner = scanner("是否生成所有的表（y/n）");
+        if (scanner.equals("n")){
+            strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
+        }
         strategy.setControllerMappingHyphenStyle(true);
 //        strategy.setTablePrefix(pc.getModuleName() + "_");
         //去除表名的前缀
@@ -172,8 +177,8 @@ public class CodeGenerator {
          */
         Map<String,String> packageInfo = new HashMap<>();
 //        packageInfo.put(ConstVal.CONTROLLER, "com.study.mybatisplus.controller."+moduleName);
-        packageInfo.put(ConstVal.SERVICE, "com.cwc.mp.services");
-        packageInfo.put(ConstVal.SERVICE_IMPL, "com.cwc.mp.services.impl");
+        packageInfo.put(ConstVal.SERVICE, "com.cwc.admin.mp.services");
+        packageInfo.put(ConstVal.SERVICE_IMPL, "com.admin.cwc.mp.services.impl");
 //        packageInfo.put(ConstVal.ENTITY, "com.study.mybatisplus.entity."+moduleName);
 //        packageInfo.put(ConstVal.MAPPER, "com.study.mybatisplus.mapper."+moduleName);
 
@@ -186,6 +191,8 @@ public class CodeGenerator {
         Map pathInfo = new HashMap<>();
         pathInfo.put(ConstVal.SERVICE_PATH, srcPath + "\\com\\cwc\\admin\\mp");
         pathInfo.put(ConstVal.SERVICE_IMPL_PATH, srcPath + "\\com\\cwc\\admin\\mp\\impl");
+        pathInfo.put(ConstVal.ENTITY_PATH, srcPath + "\\com\\cwc\\admin\\entity");
+        pathInfo.put(ConstVal.MAPPER_PATH, srcPath + "\\com\\cwc\\admin\\mapper");
         pc.setPathInfo(pathInfo);
 
         /**
@@ -194,15 +201,16 @@ public class CodeGenerator {
          * 因为packageInfo是私有成员变量，也没有提交提供公共的方法，所以使用反射注入
          * 为啥要这么干，看源码去吧
          */
-        ConfigBuilder configBuilder = new ConfigBuilder(mpg.getPackageInfo(), mpg.getDataSource(), mpg.getStrategy(), mpg.getTemplate(), mpg.getGlobalConfig());
-        Field packageInfoField = configBuilder.getClass().getDeclaredField("packageInfo");
-        packageInfoField.setAccessible(true);
-        packageInfoField.set(configBuilder,packageInfo);
+//        ConfigBuilder configBuilder = new ConfigBuilder(mpg.getPackageInfo(), mpg.getDataSource(), mpg.getStrategy(), mpg.getTemplate(), mpg.getGlobalConfig());
+//        Field packageInfoField = configBuilder.getClass().getDeclaredField("packageInfo");
+//        packageInfoField.setAccessible(true);
+//        packageInfoField.set(configBuilder,packageInfo);
 
         /**
          * 设置配置对象
          */
-        mpg.setConfig(configBuilder);
+//        mpg.setPackageInfo(new PackageConfig().setService("com.cwc.admin.mp.services").setServiceImpl("com.cwc.admin.mp.services.impl"));
+//        mpg.setConfig(configBuilder);
     }
 }
 

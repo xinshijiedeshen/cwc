@@ -1,8 +1,9 @@
 package com.cwc.admin.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,7 +16,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author 新世界的神
- * @since 2021-02-25
+ * @since 2021-03-02
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -25,6 +26,7 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     @ApiModelProperty(value = "用户名")
@@ -34,7 +36,6 @@ public class User implements Serializable {
     private String password;
 
     @ApiModelProperty(value = "真名")
-    @TableField("realName")
     private String realName;
 
     @ApiModelProperty(value = "头像")
@@ -47,23 +48,19 @@ public class User implements Serializable {
     private String email;
 
     @ApiModelProperty(value = "昵称")
-    @TableField("nickName")
     private String nickName;
 
     @ApiModelProperty(value = "备注信息")
     private String note;
 
-    @TableField("loginTime")
     private LocalDateTime loginTime;
 
-    @TableField("updateTime")
     private LocalDateTime updateTime;
 
-    @TableField("createTime")
     private LocalDateTime createTime;
 
-    @ApiModelProperty(value = "test")
-    private String test;
+    @ApiModelProperty(value = "帐号启用状态：0->禁用；1->启用")
+    private Integer status;
 
 
 }

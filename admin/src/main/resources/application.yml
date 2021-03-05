@@ -2,30 +2,29 @@ spring:
   application:
     name: cwc-admin
   profiles:
-    active: dev #Ä¬ÈÏÎª¿ª·¢»·¾³
+    active: dev
   servlet:
     multipart:
-      enabled: true #¿ªÆôÎÄ¼şÉÏ´«
-      max-file-size: 10MB #ÏŞÖÆÎÄ¼şÉÏ´«´óĞ¡Îª10M
+      enabled: true #å¼€å¯æ–‡ä»¶ä¸Šä¼ 
+      max-file-size: 10MB #é™åˆ¶æ–‡ä»¶ä¸Šä¼ å¤§å°ä¸º10M
 
 
 jwt:
-  tokenHeader: Authorization #JWT´æ´¢µÄÇëÇóÍ·
-  secret: mall-admin-secret #JWT¼Ó½âÃÜÊ¹ÓÃµÄÃÜÔ¿
-  expiration: 604800 #JWTµÄ³¬ÆÚÏŞÊ±¼ä(60*60*24*7)
-  tokenHead: 'Bearer '  #JWT¸ºÔØÖĞÄÃµ½¿ªÍ·
+  tokenHeader: Authorization #JWTå­˜å‚¨çš„è¯·æ±‚å¤´
+  secret: mall-admin-secret #JWTåŠ è§£å¯†ä½¿ç”¨çš„å¯†é’¥
+  expiration: 604800 #JWTçš„è¶…æœŸé™æ—¶é—´(60*60*24*7)
+  tokenHead: 'Bearer '  #JWTè´Ÿè½½ä¸­æ‹¿åˆ°å¼€å¤´
 
 redis:
-  database: mall
+  database: cwc
   key:
-    admin: 'ums:admin'
-    resourceList: 'ums:resourceList'
+    adminName: 'admin:username'
   expire:
     common: 86400 # 24Ğ¡Ê±
 
 secure:
   ignored:
-    urls: #°²È«Â·¾¶°×Ãûµ¥
+    urls: #å®‰å…¨è·¯å¾„ç™½åå•
       - /swagger-ui.html
       - /swagger-resources/**
       - /swagger/**
@@ -45,20 +44,20 @@ secure:
 
 aliyun:
   oss:
-    endpoint: oss-cn-shenzhen.aliyuncs.com # oss¶ÔÍâ·şÎñµÄ·ÃÎÊÓòÃû
-    accessKeyId: test # ·ÃÎÊÉí·İÑéÖ¤ÖĞÓÃµ½ÓÃ»§±êÊ¶
-    accessKeySecret: test # ÓÃ»§ÓÃÓÚ¼ÓÃÜÇ©Ãû×Ö·û´®ºÍossÓÃÀ´ÑéÖ¤Ç©Ãû×Ö·û´®µÄÃÜÔ¿
-    bucketName: macro-oss # ossµÄ´æ´¢¿Õ¼ä
+    endpoint: oss-cn-shenzhen.aliyuncs.com # osså¯¹å¤–æœåŠ¡çš„è®¿é—®åŸŸå
+    accessKeyId: test # è®¿é—®èº«ä»½éªŒè¯ä¸­ç”¨åˆ°ç”¨æˆ·æ ‡è¯†
+    accessKeySecret: test # ç”¨æˆ·ç”¨äºåŠ å¯†ç­¾åå­—ç¬¦ä¸²å’Œossç”¨æ¥éªŒè¯ç­¾åå­—ç¬¦ä¸²çš„å¯†é’¥
+    bucketName: macro-oss # ossçš„å­˜å‚¨ç©ºé—´
     policy:
-      expire: 300 # Ç©ÃûÓĞĞ§ÆÚ(S)
-    maxSize: 10 # ÉÏ´«ÎÄ¼ş´óĞ¡(M)
-    callback: http://39.98.190.128:8080/aliyun/oss/callback # ÎÄ¼şÉÏ´«³É¹¦ºóµÄ»Øµ÷µØÖ·
+      expire: 300 # ç­¾åæœ‰æ•ˆæœŸ(S)
+    maxSize: 10 # ä¸Šä¼ æ–‡ä»¶å¤§å°(M)
+    callback: http://39.98.190.128:8080/aliyun/oss/callback # æ–‡ä»¶ä¸Šä¼ æˆåŠŸåçš„å›è°ƒåœ°å€
     dir:
-      prefix: mall/images/ # ÉÏ´«ÎÄ¼ş¼ĞÂ·¾¶Ç°×º
+      prefix: mall/images/ # ä¸Šä¼ æ–‡ä»¶å¤¹è·¯å¾„å‰ç¼€
 
 minio:
-  endpoint: http://192.168.3.101:9090 #MinIO·şÎñËùÔÚµØÖ·
-  bucketName: mall #´æ´¢Í°Ãû³Æ
-  accessKey: minioadmin #·ÃÎÊµÄkey
-  secretKey: minioadmin #·ÃÎÊµÄÃØÔ¿
+  endpoint: http://192.168.3.101:9090 #MinIOæœåŠ¡æ‰€åœ¨åœ°å€
+  bucketName: mall #å­˜å‚¨æ¡¶åç§°
+  accessKey: minioadmin #è®¿é—®çš„key
+  secretKey: minioadmin #è®¿é—®çš„ç§˜é’¥
 
