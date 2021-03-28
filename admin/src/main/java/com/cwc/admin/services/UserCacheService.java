@@ -8,4 +8,6 @@ public interface UserCacheService {
      * 获取缓存后台用户信息
      */
     User getAdmin(String username);
+
+    void setAdmin(User user);
 }

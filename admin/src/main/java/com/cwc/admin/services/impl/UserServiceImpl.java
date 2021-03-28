@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cwc.admin.entity.User;
 import com.cwc.admin.mp.IUserService;
+import com.cwc.admin.services.UserCacheService;
 import com.cwc.admin.services.UserService;
 import com.cwc.common.exception.Asserts;
 import com.cwc.security.util.JwtTokenUtil;
@@ -18,7 +19,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public class UserServiceImpl implements UserService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
@@ -32,9 +33,17 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+    @Autowired
+    private UserCacheService userCacheService;
+
     @Override
     public User getUserByUserName(String userName) {
+        User admin = userCacheService.getAdmin(userName);
+        if (null != admin) return admin;
         User username = iUserService.getOne(new QueryWrapper<User>().eq("username", userName));
+        if (null != userName){
+            userCacheService.setAdmin(username);
+        }
         return username;
     }
 
