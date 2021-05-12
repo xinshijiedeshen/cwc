@@ -23,7 +23,7 @@ import lombok.EqualsAndHashCode;
 @ApiModel(value="RolePermissionRelation对象", description="后台用户和角色关系表")
 public class RolePermissionRelation implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -4872126126192753887L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;

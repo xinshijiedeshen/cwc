@@ -24,7 +24,7 @@ import lombok.EqualsAndHashCode;
 @ApiModel(value="Role对象", description="后台用户角色表")
 public class Role implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 8381720682675784615L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;

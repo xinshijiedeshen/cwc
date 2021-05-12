@@ -2,6 +2,7 @@ package com.cwc.admin.services.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.cwc.admin.entity.Permission;
 import com.cwc.admin.entity.User;
 import com.cwc.admin.mp.IUserService;
 import com.cwc.admin.services.UserCacheService;
@@ -19,7 +20,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-//@Service
+import java.util.List;
+
+@Service
 public class UserServiceImpl implements UserService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
@@ -73,10 +76,10 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String username){
         //获取用户信息
         User admin = getUserByUserName(username);
-//        if (admin != null) {
-//            List<UmsResource> resourceList = getResourceList(admin.getId());
+        if (admin != null) {
+//            List<Permission> resourceList = getResourceList(admin.getId());
 //            return new AdminUserDetails(admin,resourceList);
-//        }
+        }
         throw new UsernameNotFoundException("用户名或密码错误");
     }
 }

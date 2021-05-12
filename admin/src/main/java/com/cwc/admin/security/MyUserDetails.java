@@ -11,11 +11,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MyUserDetails implements UserDetails {
+
+    private static final long serialVersionUID = 918915543156000587L;
+
     private User user;
+
     private List<Permission> permissions;
-    public MyUserDetails(User user,List<Permission> resourceList) {
+
+    public MyUserDetails(User user,List<Permission> permissions) {
         this.user = user;
-        this.permissions = resourceList;
+        this.permissions = permissions;
     }
 
     @Override

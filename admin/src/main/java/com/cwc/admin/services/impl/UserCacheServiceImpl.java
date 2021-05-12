@@ -5,7 +5,9 @@ import com.cwc.admin.services.UserCacheService;
 import com.cwc.common.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserCacheServiceImpl implements UserCacheService {
 
     @Autowired
