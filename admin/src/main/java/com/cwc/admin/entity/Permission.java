@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author 新世界的神
- * @since 2021-03-09
+ * @since 2021-05-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -24,7 +24,7 @@ import lombok.EqualsAndHashCode;
 @ApiModel(value="Permission对象", description="")
 public class Permission implements Serializable {
 
-    private static final long serialVersionUID = 300385051432602668L;
+    private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;

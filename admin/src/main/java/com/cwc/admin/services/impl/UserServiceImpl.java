@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
         User admin = userCacheService.getAdmin(userName);
         if (null != admin) return admin;
         User username = iUserService.getOne(new QueryWrapper<User>().eq("username", userName));
-        if (null != userName){
+        if (null != userName) {
             userCacheService.setAdmin(username);
         }
         return username;
@@ -56,10 +56,10 @@ public class UserServiceImpl implements UserService {
         //密码需要客户端加密后传递
         try {
             UserDetails userDetails = loadUserByUsername(userName);
-            if(!passwordEncoder.matches(password,userDetails.getPassword())){
+            if (!passwordEncoder.matches(password, userDetails.getPassword())) {
                 Asserts.fail("密码不正确");
             }
-            if(!userDetails.isEnabled()){
+            if (!userDetails.isEnabled()) {
                 Asserts.fail("帐号已被禁用");
             }
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
@@ -73,13 +73,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username){
+    public UserDetails loadUserByUsername(String username) {
         //获取用户信息
         User admin = getUserByUserName(username);
         if (admin != null) {
-//            List<Permission> resourceList = getResourceList(admin.getId());
-//            return new AdminUserDetails(admin,resourceList);
+//            List<Permission> resourceList = getPermission(admin.getId());
+//            return new AdminUserDetails(admin, resourceList);
         }
         throw new UsernameNotFoundException("用户名或密码错误");
+    }
+
+    @Override
+    public List<Permission> getPermission(Long adminId) {
+        return null;
     }
 }
